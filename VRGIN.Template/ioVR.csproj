@@ -72,11 +72,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ioInterpreter.cs" />
-    <Compile Include="ioVRContext.cs" />
-    <Compile Include="GenericSeatedMode.cs" />
-    <Compile Include="GenericStandingMode.cs" />
-    <Compile Include="ioVR.cs" />
+    <Compile Include="AGHActor.cs" />
+    <Compile Include="AGHContext.cs" />
+    <Compile Include="AGHInterpreter.cs" />
+    <Compile Include="AGHSeatedMode.cs" />
+    <Compile Include="AGHSettings.cs" />
+    <Compile Include="AGHStandingMode.cs" />
+    <Compile Include="AGHVR.cs" />
+    <Compile Include="BubbleSelectionHandler.cs" />
+    <None Include="ioInterpreter.cs" />
+    <None Include="ioVRContext.cs" />
+    <None Include="GenericSeatedMode.cs" />
+    <None Include="GenericStandingMode.cs" />
+    <None Include="ioVR.cs" />
+    <Compile Include="MyCursorSet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
