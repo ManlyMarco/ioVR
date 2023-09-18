@@ -15,8 +15,8 @@ namespace ioVR
     public class ioVR : BaseUnityPlugin
     {
         public const string GUID = "ioVR";
-        public const string Name = "ioVR Plugin";
-        public const string Version = "1.0";
+        public const string Name = "VR mod for Insult Order";
+        public const string Version = "0.0.2";
 
         /// <summary>
         /// Determines when to boot the VR code. In most cases, it makes sense to do the check as described here.
