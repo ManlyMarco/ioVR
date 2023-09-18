@@ -1,11 +1,7 @@
-﻿using IllusionPlugin;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
+using BepInEx;
 using VRGIN.Core;
 using VRGIN.Helpers;
 
@@ -15,58 +11,31 @@ namespace ioVR
     /// <summary>
     /// This is an example for a VR plugin. At the same time, it also functions as a generic one.
     /// </summary>
-    public class ioVR : IPlugin
+    [BepInPlugin(GUID, Name, Version)]
+    public class ioVR : BaseUnityPlugin
     {
-
-        /// <summary>
-        /// Put the name of your plugin here.
-        /// </summary>
-        public string Name
-        {
-            get
-            {
-                return "ioVR Plugin";
-            }
-        }
-
-        public string Version
-        {
-            get
-            {
-                return "1.0";
-            }
-        }
+        public const string GUID = "ioVR";
+        public const string Name = "ioVR Plugin";
+        public const string Version = "1.0";
 
         /// <summary>
         /// Determines when to boot the VR code. In most cases, it makes sense to do the check as described here.
         /// </summary>
-        public void OnApplicationStart()
+        public void Start()
         {
-            bool vrDeactivated = Environment.CommandLine.Contains("--novr");
-            bool vrActivated = Environment.CommandLine.Contains("--vr");
-
-            if (vrActivated || (!vrDeactivated && SteamVRDetector.IsRunning))
+            if (Environment.CommandLine.Contains("--vr"))
             {
-                // Boot VRManager!
-                // Note: Use your own implementation of GameInterpreter to gain access to a few useful operatoins
-                // (e.g. characters, camera judging, colliders, etc.)
-                VRManager.Create<ioInterpreter>(CreateContext("VRContext.xml"));
+                var context = new ioVRContext();
+                VRManager.Create<ioInterpreter>(context);
                 VR.Manager.SetMode<GenericStandingMode>();
-
-            }
-			else
-			{
-				UnityEngine.VR.VRSettings.enabled = false;
-				UnityEngine.VR.VRSettings.LoadDeviceByName("None");
             }
         }
 
-        #region Helper code
-
-        private IVRManagerContext CreateContext(string path) {
+        private IVRManagerContext CreateContext(string path)
+        {
             var serializer = new XmlSerializer(typeof(ioVRContext));
 
-            if(File.Exists(path))
+            if (File.Exists(path))
             {
                 // Attempt to load XML
                 using (var file = File.OpenRead(path))
@@ -91,21 +60,13 @@ namespace ioVR
                     file.BaseStream.SetLength(0);
                     serializer.Serialize(file, context);
                 }
-            } catch(Exception e)
+            }
+            catch (Exception e)
             {
                 VRLog.Error("Failed to write {0}", path);
             }
 
             return context;
         }
-        #endregion
-
-        #region Unused
-        public void OnApplicationQuit() { }
-        public void OnFixedUpdate() { }
-        public void OnLevelWasInitialized(int level) { }
-        public void OnLevelWasLoaded(int level) { }
-        public void OnUpdate() { }
-        #endregion
     }
 }
