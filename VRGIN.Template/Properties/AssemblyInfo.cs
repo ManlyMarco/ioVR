@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle(ioVR.ioVR.Name)]
 [assembly: AssemblyDescription(ioVR.ioVR.Name)]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("https://github.com/ManlyMarco/ioVR-BepInEx")]
 [assembly: AssemblyProduct(ioVR.ioVR.Name)]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 
